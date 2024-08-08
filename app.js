@@ -29,15 +29,11 @@ app.post('/callback', async (req, res) => {
 });
 
 app.post('/payment', async (req, res) => {
-
-    console.log(req.body);
-    
-
     var accessKey = 'F8BBA842ECF85';
     var secretKey = 'K951B6PE1waDMi640xX08PD3vg6EkVlz';
     var orderInfo = 'pay with MoMo';
     var partnerCode = 'MOMO';
-    var redirectUrl = 'https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b';
+    var redirectUrl = 'http://localhost:3333/profile/order';
     var ipnUrl = 'http://103.56.160.96:3003/callback';
     var requestType = "captureWallet";
     var amount = '50000';
