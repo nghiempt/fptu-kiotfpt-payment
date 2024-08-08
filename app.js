@@ -10,9 +10,20 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/callback', (req, res) => {
+app.post('/callback', async (req, res) => {
     console.log('Received callback request');
     console.log(req.body);
+    let orderId = req.body.orderId.replace(/\D/g, '');
+    let convertedDigits = orderId.split('').map((char) => {
+        return (parseInt(char) % 9) + 1;
+    }).join('');
+    const options = {
+        method: 'GET',
+        url: 'https://api.kiotfpt.store/v1/order/update-pay/' + convertedDigits.toString(),
+    }
+    console.log(options);
+    let result = await axios(options);
+    console.log(result.data);
     res.sendStatus(204);
 });
 
