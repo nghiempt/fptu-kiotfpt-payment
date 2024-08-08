@@ -17,9 +17,10 @@ app.post('/callback', async (req, res) => {
     let convertedDigits = orderId.split('').map((char) => {
         return (parseInt(char) % 9) + 1;
     }).join('');
+    let lastFiveDigits = convertedDigits.slice(-5);
     const options = {
         method: 'GET',
-        url: 'https://api.kiotfpt.store/v1/order/update-pay/' + convertedDigits.toString(),
+        url: 'https://api.kiotfpt.store/v1/order/update-pay/' + lastFiveDigits.toString(),
     }
     console.log(options);
     let result = await axios(options);
